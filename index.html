@@ -1,0 +1,468 @@
+<!-- Created by Sujal Kumar -->
+
+<!--Created by Sujal and Rakshit-->
+<!DOCTYPE html>
+<html>
+    <head>
+       <title>Mobile Banking</title>
+       <style>
+           /* Created by Sujal Kumar */
+
+/* Created by Sujal and Rakshit */
+
+ body {
+    font-size: 13pt;
+    background-color: #efefef;
+    padding: 10px
+    margin: 0;
+}
+fieldset {
+width: 350px;
+border: 1px solid #dcdcdc;
+border-radius: 10px;
+padding: 20px;
+text-align: left;
+}
+legend {
+background-color: #efefef;
+border: 1px solid #dcdcdc;
+border-radius: 10px;
+padding: 10px 20px;
+text-align: center;
+text-transform: uppercase;
+}
+input[type="button"] {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 10px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: black;
+  background:linear-gradient(red,orange,yellow,green,blue,indigo,violet);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+progress{
+margin:0; padding:0;
+-webkit-appearance:none;
+height:30px;
+width:100%;
+}
+
+progress::-webkit-progress-bar{
+    background:black;
+    border:2px groove blue;
+}
+
+progress::-webkit-progress-value{
+   background-image:-webkit-linear-gradient(-45deg, transparent 33%, rgba(0,0,0,0.3) 33%, rgba(0,0,0,0.1) 66%, transparent 66%),-webkit-linear-gradient(top, 
+                               rgba(255, 255, 255, .25), 
+                               rgba(0, 0, 0, .25)),-webkit-linear-gradient(left,red,orange,yellow,green,blue,indigo,violet);
+background-size:
+55px 30px, 
+100% 100%, 
+100% 100%;
+}
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 25%;
+  border-top: 16px solid #3498db;
+  width: 60px;
+  height: 60px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg);}
+}
+       </style>
+    </head>
+    <body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("input").focus(function(){
+        $(this).css("background-color", "#cccccc");
+    });
+    $("input").blur(function(){
+        $(this).css("background-color", "#ffffff");
+    });
+});
+</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.min.css" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+        <script src="bower_components/sweetalert2/dist/sweetalert2.all.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+        <script src="bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="bower_components/sweetalert2/dist/sweetalert2.min.css">
+    <marquee direction="right">
+    <b>
+    <font color="red">
+    Welcome to my Mobile Banking code 1.5!
+    </font>
+    </b>
+    </marquee>
+    <marquee>
+    <font color="green">New features available now!</font>
+    </marquee>
+        <form>
+            <fieldset>
+        <legend><h4>Registration details</h4></legend>
+                <label><b>Username:</b><br />
+                    <input type="text" name="username"  required="required" placeholder="Sololearn" id="username"/>
+                </label><br />
+           <label><b>Email:</b><br />
+              <input type="email" name="email" id="email_id" placeholder="Sololearn@gmail.com"/></label><br />
+              <label><b>Mobile:</b><br />
+                  <input type="number" name="mobile" placeholder="9567123456" id="mob_no" required="required"/></label><br />                 <label><b>Age:</b><br />
+                      <input type="number" name="depart" placeholder="25" id="age" required="required"/>
+                  </label>
+              <br />
+              
+             <input type="button" onClick="register()" value="Register"/>
+               <p> 
+           <progress id="p1" value="0" max="100"></progress>
+       </p> <p id="demo">Click on Register to start!</p>
+       
+            </fieldset>
+        </form>
+        <br />
+        <hr>
+        <h6>
+*Please tap the Generate button available below after registeration.
+</h6>
+<hr>
+<center>---Password Generation Section---</center>        
+ <form>
+        <input type="text" id="pass" maxlength="20" onkeyup="return passwordChanged();" />
+<span id="strength">Type Password</span>
+        <br />
+        <input onClick="generate()" type="button" value="Generate" />
+        <input onClick="confirm_p()" type="button" value="Confirm"/>
+        </form>
+        <hr>
+        <center>---Transaction Section---</center>
+        <form>
+        <fieldset>
+          <legend>Transaction Details</legend>
+          <label><b>Beneficiary Details:</b></label><br />
+          <select id="mySelect"><option>---Select Beneficiary---</option></select>
+          <br />
+          <label><b>Amount:</b></label><br />
+          <input type="number" id="amount" placeholder="5000"/><br />
+          <label><b>Your Username:</b></label>
+          <br />
+          <input type="text" id="username1" placeholder="Sololearn"/>
+          <br />
+          <label><b>Your password:</b></label>
+          <br />
+          <input type="password" id="password1" placeholder="******"/>
+          <br />
+          <input type="button" value="Transact" onClick="move1()"/><br />
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+
+<div class="w3-container">
+
+  <div class="w3-light-grey">
+    <div id="myBar" class="w3-container w3-green" style="height:24px;width:0%">
+    </div>
+  </div>
+</div>
+<center><p id="demo2">Click on Transact after form fillup!</p></center>
+        </fieldset>
+        </form>
+        <form>
+        <fieldset>
+            <legend>Add Beneficiary</legend>
+            <label><b>Beneficiary Name:</b></label>
+            <br />
+         <input type="text" id="b_n"/>
+         <br />
+            <label><b>Beneficiary Bank:</b></label>
+            <br />
+            <input type="text" id="b_b"/>
+            <br />
+            <b>Please select the medium through which you want to verify:</b>
+            <br />
+            <center><input type="radio" name="medium" id="c_mobile" value="Mobile"/><b>Mobile</b>
+            <input type="radio" name="medium" id="c_email" value="Email"/><b>Email</b>
+            <br />
+            <input type="button" value="Confirm" onClick="c_a_b()"/>
+            </center>
+            <label>Please enter the OTP sent to the medium you have selected below:</label>
+            <br />
+            <input type="number" id="otp"/>
+            <input type="button" value="Add Beneficiary" onClick="a_n_b()"/>
+        </fieldset>
+        </form>
+        <form>
+            <fieldset>
+                <legend>
+                    <p id="mobile">Mobile : Null</p>
+                </legend>
+                <p id="mess1">No Messages.</p>
+                <input type="number" id="otp1" disabled/>
+            </fieldset>
+        </form>
+        <form>
+            <fieldset>
+                <legend>
+                    <p id="email">Email : Null</p>
+                </legend>
+                <p id="email1">No Emails.</p>
+                <input type="number" id="otp2" disabled/>
+            </fieldset>
+        </form>
+        <form>
+        <fieldset>
+            <legend>Offers</legend>
+            <center>Coming soon!</center>
+        </fieldset>
+        <script>
+            // Created by Sujal Kumar
+
+// Created by Sujal and Rakshit
+function confirm_r()
+{
+    var us_id=document.getElementById('username');
+    var age1=document.getElementById('age');
+    if(us_id.value!=''&&age1.value>=10){
+      document.getElementById('demo').innerHTML ='<p style="color:green">Registration Completed!</p>';
+    }
+    else{
+        document.getElementById('demo').innerHTML ='<p style="color:red">Registration Cancelled!</p>';
+    }
+}
+function progress_bar(){
+
+var pos = 0; 
+    var bar = document.getElementById('p1');
+    var t = setInterval(move, 50);
+    function move() {
+        if(pos >= 100) {
+            clearInterval(t);
+            confirm_r();
+            var us_id=document.getElementById('username');
+var age1=document.getElementById('age');
+if(us_id.value!=''){
+if(age1.value>=10){
+var c_user_id=confirm("Do you really want to assign "+us_id.value+" as your username?");
+if(c_user_id==true)
+{
+    swal("Congratulations!","You registered!","success");
+    var mob_no=document.getElementById('mob_no');
+document.getElementById('mobile').innerHTML="Mobile : "+mob_no.value;
+var email_id=document.getElementById('email_id');
+document.getElementById('email').innerHTML=" Email : "+email_id.value;
+}
+else
+{
+    alert("Please enter your correct details.");    
+}
+}
+else
+{
+   swal("You are too young for using this facility!","You can add a request for children mobile banking in the comment box.","warning"); 
+}
+}
+else
+{
+    swal("Username cannot be assigned as null!","Please enter an username for registeration","warning");
+}
+        }
+        else {
+            pos += 1;
+            bar.value= pos;
+            if(bar.value==5){
+                document.getElementById('demo').innerHTML="Processing the given data...";
+            }
+            if(bar.value==20){
+                document.getElementById('demo').innerHTML="Checking Username...";
+            }
+            if(bar.value==40){
+                document.getElementById('demo').innerHTML="Checking Age...";
+            }
+            if(bar.value==60){
+                document.getElementById('demo').innerHTML="Preparing User Package...";
+            }
+            if(bar.value==80){
+                document.getElementById('demo').innerHTML="Adding details to the Server...";
+            }
+        }
+    }
+    }
+var  user = prompt("What is your name?");
+alert(""+user+" Welcome to my Mobile Banking code.1.4");
+alert( ""+user+ ", please fill up all details.");
+alert (""+user+",please upvote this code if you like it!");
+alert("Code Updated! Mobile Banking 1.4 is now alive!");
+function register(){
+progress_bar();
+}
+function passwordChanged() {
+var strength = document.getElementById('strength');
+var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+var pwd = document.getElementById("pass");
+if (pwd.value.length==0) {
+strength.innerHTML = 'Type Password';
+} else if (false == enoughRegex.test(pwd.value)) {
+strength.innerHTML = 'More Characters';
+} else if (strongRegex.test(pwd.value)) {
+strength.innerHTML = '<span style="color:green">Strong!</span>';
+} else if (mediumRegex.test(pwd.value)) {
+strength.innerHTML = '<span style="color:orange">Medium!</span>';
+} else {
+strength.innerHTML = '<span style="color:red">Weak!</span>';
+}
+}
+function generate() {
+            var charPos;
+            var pwChar;
+            var pwLength = 10;
+            var availChars = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ#$!";
+            var pw = "";
+            for (i = 0; i < pwLength; i++) {
+                charPos = Math.floor(Math.random() * availChars.length);
+                pwChar = availChars.charAt(charPos);
+                pw = pw + pwChar;
+            }
+            pass.value = pw;
+
+        }
+function confirm_p(){
+    var us_id=document.getElementById('username');
+    var age1=document.getElementById('age');
+    if(us_id.value!=''&&age1.value>=10){
+    var choice=confirm("Do you want to confirm your password?");
+    if(choice==true){
+        var pass_word=document.getElementById('pass');
+        swal("Congrats!","You are now ready for transactions!Please note the username and password for further use.","success");
+    }
+    else{
+        alert("Please again tap on the generate button for other password");
+    }
+    }
+    else{
+        alert("Please register first to use this section!");
+    }
+}
+function move1() {
+  var elem = document.getElementById("myBar");   
+  var width = 0;
+  var username1=document.getElementById("username1");
+  var password1=document.getElementById("password1");
+  var us_id=document.getElementById("username");
+  var pass_id=document.getElementById("pass");
+  var name=document.getElementById("mySelect").value;
+  var amount=document.getElementById("amount");
+  var id = setInterval(frame, 50);
+  function frame() {
+    if (width >= 100) {
+      clearInterval(id);
+     if(username1.value!=''&&password1.value!=''){ if((us_id.value==username1.value)&&(pass_id.value==password1.value))
+      {
+      if(name!="---Select Beneficiary---"){
+          swal("Congratulations!","You successfully transacted "+amount.value+" to "+name,"success");
+          }
+          else{
+              swal("Error!","Please add a beneficiary before transactions.","warning")
+          }
+      }
+      
+      else{
+          alert("Incorrect Username or Password!");
+      }
+      }
+      else
+      {
+          alert("Please Register First!");
+      }
+    } else {
+      width++; 
+      elem.style.width = width + '%'; 
+      var num = width * 1 / 10;
+      num = num.toFixed(0)
+      
+    }
+  }
+}
+function c_a_b()
+{
+    if(document.getElementById('c_mobile').checked)
+    {
+ document.getElementById('mess1').innerHTML='<p style="color:green">New Message Recieved!</p>OTP for beneficiary verification : ';
+ document.getElementById('otp1').value=4324;
+    }
+    else if(document.getElementById('c_email').checked)
+    {
+        document.getElementById('email1').innerHTML='<p style="color:green">New Email Recieved!</p>Dear user,<br>OTP regarding to your beneficiary verification is : ';
+        document.getElementById('otp2').value=4324;
+    }
+}
+function a_n_b()
+{
+var b_n=document.getElementById('b_n');
+var otp=document.getElementById('otp');
+var otp1=document.getElementById('otp1');
+var otp2=document.getElementById('otp2');
+if(document.getElementById('c_mobile').checked){
+    if(otp.value==otp1.value)
+    {
+        var x = document.getElementById("mySelect");
+    var item=document.getElementById("b_n");
+    var option = document.createElement("option");
+    option.text = item.value;
+    x.add(option);
+        alert("You successfully added a beneficiary!");
+    }
+    else
+    {
+        alert("Incorrect OTP!");
+    }
+}
+else if(document.getElementById('c_email').checked)
+{
+    if(otp.value==otp2.value)
+    {
+                var y = document.getElementById("mySelect");
+    var item=document.getElementById("b_n");
+    var option = document.createElement("option");
+    option.text = item.value;
+    y.add(option);
+        alert("You successfully added a beneficiary!");
+    }
+    else
+    {
+        alert("Incorrect OTP!");
+    }
+}
+}
+        </script>
+    </body>
+</html>
